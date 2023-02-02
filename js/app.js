@@ -764,7 +764,7 @@
     p();
   }
   let E, x, M;
-  function k() {
+  function $() {
     return (
       E ||
         (E = (function () {
@@ -795,11 +795,11 @@
       E
     );
   }
-  function $(e = {}) {
+  function k(e = {}) {
     return (
       x ||
         (x = (function ({ userAgent: e } = {}) {
-          const t = k(),
+          const t = $(),
             s = o(),
             i = s.navigator.platform,
             n = e || s.navigator.userAgent,
@@ -2159,7 +2159,7 @@
       s.updateProgress(i.currentTranslate),
       s.setTranslate(i.currentTranslate));
   }
-  function N(e) {
+  function _(e) {
     const t = this,
       s = t.touchEventsData,
       { params: i, touches: n, rtlTranslate: r, slidesGrid: a, enabled: l } = t;
@@ -2264,7 +2264,7 @@
           "prev" === t.swipeDirection && t.slideTo(null !== m ? m : u));
     }
   }
-  function _() {
+  function N() {
     const e = this,
       { params: t, el: s } = e;
     if (s && 0 === s.offsetWidth) return;
@@ -2295,7 +2295,7 @@
           t.animating &&
           (e.stopPropagation(), e.stopImmediatePropagation())));
   }
-  function F() {
+  function j() {
     const e = this,
       { wrapperEl: t, rtlTranslate: s, enabled: i } = e;
     if (!i) return;
@@ -2312,9 +2312,9 @@
       n !== e.progress && e.updateProgress(s ? -e.translate : e.translate),
       e.emit("setTranslate", e.translate, !1);
   }
-  let j = !1;
+  let F = !1;
   function q() {}
-  const V = (e, t) => {
+  const W = (e, t) => {
     const s = a(),
       {
         params: i,
@@ -2353,26 +2353,26 @@
             o.ios || o.android
               ? "resize orientationchange observerUpdate"
               : "resize observerUpdate",
-            _,
+            N,
             !0
           )
-        : e[u]("observerUpdate", _, !0);
+        : e[u]("observerUpdate", N, !0);
   };
-  const W = {
+  const V = {
       attachEvents: function () {
         const e = this,
           t = a(),
           { params: s, support: i } = e;
         (e.onTouchStart = G.bind(e)),
           (e.onTouchMove = B.bind(e)),
-          (e.onTouchEnd = N.bind(e)),
-          s.cssMode && (e.onScroll = F.bind(e)),
+          (e.onTouchEnd = _.bind(e)),
+          s.cssMode && (e.onScroll = j.bind(e)),
           (e.onClick = H.bind(e)),
-          i.touch && !j && (t.addEventListener("touchstart", q), (j = !0)),
-          V(e, "on");
+          i.touch && !F && (t.addEventListener("touchstart", q), (F = !0)),
+          W(e, "on");
       },
       detachEvents: function () {
-        V(this, "off");
+        W(this, "off");
       },
     },
     R = (e, t) => e.grid && t.grid && t.grid.rows > 1;
@@ -2661,7 +2661,7 @@
             ].style.cursor = "");
         },
       },
-      events: W,
+      events: V,
       breakpoints: X,
       checkOverflow: {
         checkOverflow: function () {
@@ -2750,8 +2750,8 @@
       }
       const i = this;
       (i.__swiper__ = !0),
-        (i.support = k()),
-        (i.device = $({ userAgent: s.userAgent })),
+        (i.support = $()),
+        (i.device = k({ userAgent: s.userAgent })),
         (i.browser = L()),
         (i.eventsListeners = {}),
         (i.eventsAnyListeners = []),
@@ -3725,30 +3725,25 @@
       destroy: u,
     });
   }
-  window.addEventListener("load", function (e) {
-    !(async function () {
-      if (document.querySelector(".swiper")) {
-        const e = new ee(".swiper", {
-            modules: [se, ne],
-            observer: !0,
-            observeParents: !0,
-            slidesPerView: 1,
-            spaceBetween: 0,
-            autoHeight: !0,
-            speed: 800,
-            pagination: { el: ".swiper-pagination", clickable: !0 },
-            navigation: {
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
-            },
-            on: {},
-          }),
-          t = document.querySelectorAll(
-            ".swiper-button-next, .swiper-button-prev, .swiper-pagination"
-          ),
-          s = document.querySelectorAll(".projects__type"),
-          i = document.querySelector(".projects__slider");
-        let n = JSON.stringify([
+  let re, ae;
+  async function le() {
+    if (document.querySelector(".swiper")) {
+      const e = new ee(".swiper", {
+          modules: [se, ne],
+          observer: !0,
+          observeParents: !0,
+          slidesPerView: 1,
+          spaceBetween: 0,
+          autoHeight: !0,
+          speed: 800,
+          pagination: { el: ".swiper-pagination", clickable: !0 },
+          navigation: { nextEl: re, prevEl: ae },
+          on: {},
+        }),
+        t = document.querySelectorAll(`${re}, ${ae}, .swiper-pagination`),
+        s = document.querySelectorAll(".projects__type");
+      let i = document.querySelector(".projects__slider"),
+        n = JSON.stringify([
           ["Rostov-on-Don LCD Admiral", "81 m2", "3.5 months", "Upon request"],
           ["Sochi LCD Thieves", "98 m2", "2.6 months", "Upon request"],
           [
@@ -3758,36 +3753,51 @@
             "Upon request",
           ],
         ]);
-        n = JSON.parse(n);
-        let r = document.querySelectorAll(".item__subtitle");
-        function a() {
+      n = JSON.parse(n);
+      let r = document.querySelectorAll(".item__subtitle");
+      function a() {
+        const t = e.realIndex;
+        for (let e = 0; e < s.length; e++)
+          (s[e].style.color = "rgba(255,255,255,0.3)"),
+            (r[e].textContent = n[t][e]);
+        s[t].style.color = "#E3B873";
+      }
+      for (let l = 0; l < s.length; l++)
+        s[l].addEventListener("click", () => {
+          e.slideTo(l), a();
+        });
+      i.addEventListener("mousemove", () => {
+        a();
+      }),
+        t.forEach((e) => {
+          e.addEventListener("click", () => {
+            a();
+          });
+        }),
+        e.on("slideChange", function () {
           const t = e.realIndex;
           for (let e = 0; e < s.length; e++)
             (s[e].style.color = "rgba(255,255,255,0.3)"),
               (r[e].textContent = n[t][e]);
           s[t].style.color = "#E3B873";
-        }
-        for (let l = 0; l < s.length; l++)
-          s[l].addEventListener("click", () => {
-            e.slideTo(l), a();
-          });
-        i.addEventListener("mousemove", () => {
-          a();
         }),
-          i.addEventListener("touchend", () => {
-            a();
-          }),
-          t.forEach((e) => {
-            e.addEventListener("click", () => {
-              a();
-            });
-          });
-      }
-    })();
+        window.addEventListener("resize", function () {
+          window.innerWidth <= 991.98
+            ? ((re = ".projects__button-next"), (ae = ".projects__button-prev"))
+            : ((re = ".swiper-button-next"), (ae = ".swiper-button-prev")),
+            le();
+        });
+    }
+  }
+  window.addEventListener("load", function (e) {
+    window.innerWidth <= 991.98
+      ? ((re = ".projects__button-next"), (ae = ".projects__button-prev"))
+      : ((re = ".swiper-button-next"), (ae = ".swiper-button-prev")),
+      le();
   });
-  let re = !1;
+  let oe = !1;
   setTimeout(() => {
-    if (re) {
+    if (oe) {
       let e = new Event("windowScroll");
       window.addEventListener("scroll", function (t) {
         document.dispatchEvent(e);
