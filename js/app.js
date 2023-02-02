@@ -89,7 +89,7 @@
   }
   const l = {
     document: r,
-    navigator: { userAgent: "" },
+    navigator: { userAgentData: "" },
     location: {
       hash: "",
       host: "",
@@ -798,11 +798,11 @@
   function k(e = {}) {
     return (
       x ||
-        (x = (function ({ userAgent: e } = {}) {
+        (x = (function ({ userAgentData: e } = {}) {
           const t = $(),
             s = o(),
             i = s.navigator.platform,
-            n = e || s.navigator.userAgent,
+            n = e || s.navigator.userAgentData,
             r = { ios: !1, android: !1 },
             a = s.screen.width,
             l = s.screen.height,
@@ -848,7 +848,7 @@
           const e = o();
           return {
             isSafari: (function () {
-              const t = e.navigator.userAgent.toLowerCase();
+              const t = e.navigator.userAgentData.toLowerCase();
               return (
                 t.indexOf("safari") >= 0 &&
                 t.indexOf("chrome") < 0 &&
@@ -856,7 +856,7 @@
               );
             })(),
             isWebView: /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
-              e.navigator.userAgent
+              e.navigator.userAgentData
             ),
           };
         })()),
@@ -2513,7 +2513,7 @@
     width: null,
     height: null,
     preventInteractionOnTransition: !1,
-    userAgent: null,
+    userAgentData: null,
     url: null,
     edgeSwipeDetection: !1,
     edgeSwipeThreshold: 20,
@@ -2751,7 +2751,7 @@
       const i = this;
       (i.__swiper__ = !0),
         (i.support = $()),
-        (i.device = k({ userAgent: s.userAgent })),
+        (i.device = k({ userAgentData: s.userAgentData })),
         (i.browser = L()),
         (i.eventsListeners = {}),
         (i.eventsAnyListeners = []),
