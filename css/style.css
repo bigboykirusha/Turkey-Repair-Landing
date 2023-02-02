@@ -656,15 +656,16 @@ h6 {
 }
 @media (max-width: 61.99875em) {
   .projects__body {
-    width: 679px;
     margin: 0 auto;
     position: relative;
+    flex: 1 1 auto;
+    width: 75vw;
   }
 }
 @media (max-width: 700px) {
   .projects__body {
     width: 100%;
-    margin: 0 auto;
+    margin: 0;
   }
 }
 .projects__slider {

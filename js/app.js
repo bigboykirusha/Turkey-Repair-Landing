@@ -89,7 +89,7 @@
   }
   const l = {
     document: r,
-    navigator: { userAgentData: "" },
+    navigator: { userAgent: "" },
     location: {
       hash: "",
       host: "",
@@ -798,11 +798,11 @@
   function k(e = {}) {
     return (
       x ||
-        (x = (function ({ userAgentData: e } = {}) {
+        (x = (function ({ userAgent: e } = {}) {
           const t = $(),
             s = o(),
             i = s.navigator.platform,
-            n = e || s.navigator.userAgentData,
+            n = e || s.navigator.userAgent,
             r = { ios: !1, android: !1 },
             a = s.screen.width,
             l = s.screen.height,
@@ -848,7 +848,7 @@
           const e = o();
           return {
             isSafari: (function () {
-              const t = e.navigator.userAgentData.toLowerCase();
+              const t = e.navigator.userAgent.toLowerCase();
               return (
                 t.indexOf("safari") >= 0 &&
                 t.indexOf("chrome") < 0 &&
@@ -856,7 +856,7 @@
               );
             })(),
             isWebView: /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
-              e.navigator.userAgentData
+              e.navigator.userAgent
             ),
           };
         })()),
@@ -1538,7 +1538,7 @@
       );
     },
   };
-  function z({ swiper: e, runCallbacks: t, direction: s, step: i }) {
+  function I({ swiper: e, runCallbacks: t, direction: s, step: i }) {
     const { activeIndex: n, previousIndex: r } = e;
     let a = s;
     if (
@@ -1553,7 +1553,7 @@
           : e.emit(`slidePrevTransition${i}`);
     }
   }
-  const I = {
+  const z = {
     slideTo: function (e = 0, t = this.params.speed, s = !0, i, n) {
       if ("number" != typeof e && "string" != typeof e)
         throw new Error(
@@ -2513,7 +2513,7 @@
     width: null,
     height: null,
     preventInteractionOnTransition: !1,
-    userAgentData: null,
+    userAgent: null,
     url: null,
     edgeSwipeDetection: !1,
     edgeSwipeThreshold: 20,
@@ -2624,7 +2624,7 @@
             { params: i } = s;
           i.cssMode ||
             (i.autoHeight && s.updateAutoHeight(),
-            z({ swiper: s, runCallbacks: e, direction: t, step: "Start" }));
+            I({ swiper: s, runCallbacks: e, direction: t, step: "Start" }));
         },
         transitionEnd: function (e = !0, t) {
           const s = this,
@@ -2632,10 +2632,10 @@
           (s.animating = !1),
             i.cssMode ||
               (s.setTransition(0),
-              z({ swiper: s, runCallbacks: e, direction: t, step: "End" }));
+              I({ swiper: s, runCallbacks: e, direction: t, step: "End" }));
         },
       },
-      slide: I,
+      slide: z,
       loop: D,
       grabCursor: {
         setGrabCursor: function (e) {
@@ -2751,7 +2751,7 @@
       const i = this;
       (i.__swiper__ = !0),
         (i.support = $()),
-        (i.device = k({ userAgentData: s.userAgentData })),
+        (i.device = k({ userAgent: s.userAgent })),
         (i.browser = L()),
         (i.eventsListeners = {}),
         (i.eventsAnyListeners = []),
@@ -3726,78 +3726,76 @@
     });
   }
   let re, ae;
-  async function le() {
-    if (document.querySelector(".swiper")) {
-      const e = new ee(".swiper", {
-          modules: [se, ne],
-          observer: !0,
-          observeParents: !0,
-          slidesPerView: 1,
-          spaceBetween: 0,
-          autoHeight: !0,
-          speed: 800,
-          pagination: { el: ".swiper-pagination", clickable: !0 },
-          navigation: { nextEl: re, prevEl: ae },
-          on: {},
-        }),
-        t = document.querySelectorAll(`${re}, ${ae}, .swiper-pagination`),
-        s = document.querySelectorAll(".projects__type");
-      let i = document.querySelector(".projects__slider"),
-        n = JSON.stringify([
-          ["Rostov-on-Don LCD Admiral", "81 m2", "3.5 months", "Upon request"],
-          ["Sochi LCD Thieves", "98 m2", "2.6 months", "Upon request"],
-          [
-            "Rostov-on-Don LCD Patriotic",
-            "78 m2",
-            "4.5 months",
-            "Upon request",
-          ],
-        ]);
-      n = JSON.parse(n);
-      let r = document.querySelectorAll(".item__subtitle");
-      function a() {
-        const t = e.realIndex;
-        for (let e = 0; e < s.length; e++)
-          (s[e].style.color = "rgba(255,255,255,0.3)"),
-            (r[e].textContent = n[t][e]);
-        s[t].style.color = "#E3B873";
-      }
-      for (let l = 0; l < s.length; l++)
-        s[l].addEventListener("click", () => {
-          e.slideTo(l), a();
-        });
-      i.addEventListener("mousemove", () => {
-        a();
-      }),
-        t.forEach((e) => {
-          e.addEventListener("click", () => {
-            a();
-          });
-        }),
-        e.on("slideChange", function () {
-          const t = e.realIndex;
-          for (let e = 0; e < s.length; e++)
-            (s[e].style.color = "rgba(255,255,255,0.3)"),
-              (r[e].textContent = n[t][e]);
-          s[t].style.color = "#E3B873";
-        }),
-        window.addEventListener("resize", function () {
-          window.innerWidth <= 991.98
-            ? ((re = ".projects__button-next"), (ae = ".projects__button-prev"))
-            : ((re = ".swiper-button-next"), (ae = ".swiper-button-prev")),
-            le();
-        });
-    }
-  }
   window.addEventListener("load", function (e) {
     window.innerWidth <= 991.98
       ? ((re = ".projects__button-next"), (ae = ".projects__button-prev"))
       : ((re = ".swiper-button-next"), (ae = ".swiper-button-prev")),
-      le();
+      (async function () {
+        if (document.querySelector(".swiper")) {
+          const e = new ee(".swiper", {
+              modules: [se, ne],
+              observer: !0,
+              observeParents: !0,
+              slidesPerView: 1,
+              spaceBetween: 0,
+              autoHeight: !0,
+              speed: 800,
+              pagination: { el: ".swiper-pagination", clickable: !0 },
+              navigation: { nextEl: re, prevEl: ae },
+              on: {},
+            }),
+            t = document.querySelectorAll(`${re}, ${ae}, .swiper-pagination`),
+            s = document.querySelectorAll(".projects__type");
+          let i = document.querySelector(".projects__slider"),
+            n = JSON.stringify([
+              [
+                "Rostov-on-Don LCD Admiral",
+                "81 m2",
+                "3.5 months",
+                "Upon request",
+              ],
+              ["Sochi LCD Thieves", "98 m2", "2.6 months", "Upon request"],
+              [
+                "Rostov-on-Don LCD Patriotic",
+                "78 m2",
+                "4.5 months",
+                "Upon request",
+              ],
+            ]);
+          n = JSON.parse(n);
+          let r = document.querySelectorAll(".item__subtitle");
+          function a() {
+            const t = e.realIndex;
+            for (let e = 0; e < s.length; e++)
+              (s[e].style.color = "rgba(255,255,255,0.3)"),
+                (r[e].textContent = n[t][e]);
+            s[t].style.color = "#E3B873";
+          }
+          for (let l = 0; l < s.length; l++)
+            s[l].addEventListener("click", () => {
+              e.slideTo(l), a();
+            });
+          i.addEventListener("mousemove", () => {
+            a();
+          }),
+            t.forEach((e) => {
+              e.addEventListener("click", () => {
+                a();
+              });
+            }),
+            e.on("slideChange", function () {
+              const t = e.realIndex;
+              for (let e = 0; e < s.length; e++)
+                (s[e].style.color = "rgba(255,255,255,0.3)"),
+                  (r[e].textContent = n[t][e]);
+              s[t].style.color = "#E3B873";
+            });
+        }
+      })();
   });
-  let oe = !1;
+  let le = !1;
   setTimeout(() => {
-    if (oe) {
+    if (le) {
       let e = new Event("windowScroll");
       window.addEventListener("scroll", function (t) {
         document.dispatchEvent(e);
