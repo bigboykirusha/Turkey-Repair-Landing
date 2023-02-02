@@ -672,6 +672,7 @@ h6 {
 }
 .projects__slider {
   min-width: 0;
+  border-radius: 4px;
 }
 .projects__picture {
   max-width: 100%;
