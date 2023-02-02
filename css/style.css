@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap);
-@charset "UTF-8";
 @font-face {
   font-family: NunitoSans;
   font-display: swap;
@@ -599,6 +598,7 @@ h6 {
 .projects__block {
   display: flex;
   column-gap: 55px;
+  min-width: 0;
 }
 @media (max-width: 61.99875em) {
   .projects__block {
@@ -666,6 +666,9 @@ h6 {
     width: 100%;
     margin: 0 auto;
   }
+}
+.projects__slider {
+  min-width: 0;
 }
 .projects__picture {
   max-width: 100%;
