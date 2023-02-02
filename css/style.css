@@ -509,6 +509,7 @@ h6 {
   height: 100%;
   top: 0;
   left: 0;
+  border-radius: 4px;
 }
 .first-block__picture {
   position: absolute;
@@ -517,6 +518,7 @@ h6 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 4px;
 }
 .first-block__layout {
   position: absolute;
@@ -673,6 +675,7 @@ h6 {
 }
 .projects__picture {
   max-width: 100%;
+  border-radius: 4px;
 }
 .projects__chose {
   display: flex;
