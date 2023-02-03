@@ -764,7 +764,7 @@
     p();
   }
   let E, x, M;
-  function $() {
+  function k() {
     return (
       E ||
         (E = (function () {
@@ -795,11 +795,11 @@
       E
     );
   }
-  function k(e = {}) {
+  function $(e = {}) {
     return (
       x ||
         (x = (function ({ userAgent: e } = {}) {
-          const t = $(),
+          const t = k(),
             s = o(),
             i = s.navigator.platform,
             n = e || s.navigator.userAgent,
@@ -841,7 +841,7 @@
       x
     );
   }
-  function L() {
+  function P() {
     return (
       M ||
         (M = (function () {
@@ -863,7 +863,7 @@
       M
     );
   }
-  const P = {
+  const L = {
     on(e, t, s) {
       const i = this;
       if (!i.eventsListeners || i.destroyed) return i;
@@ -2159,7 +2159,7 @@
       s.updateProgress(i.currentTranslate),
       s.setTranslate(i.currentTranslate));
   }
-  function _(e) {
+  function N(e) {
     const t = this,
       s = t.touchEventsData,
       { params: i, touches: n, rtlTranslate: r, slidesGrid: a, enabled: l } = t;
@@ -2264,7 +2264,7 @@
           "prev" === t.swipeDirection && t.slideTo(null !== m ? m : u));
     }
   }
-  function N() {
+  function _() {
     const e = this,
       { params: t, el: s } = e;
     if (s && 0 === s.offsetWidth) return;
@@ -2314,7 +2314,7 @@
   }
   let F = !1;
   function q() {}
-  const W = (e, t) => {
+  const V = (e, t) => {
     const s = a(),
       {
         params: i,
@@ -2353,26 +2353,26 @@
             o.ios || o.android
               ? "resize orientationchange observerUpdate"
               : "resize observerUpdate",
-            N,
+            _,
             !0
           )
-        : e[u]("observerUpdate", N, !0);
+        : e[u]("observerUpdate", _, !0);
   };
-  const V = {
+  const W = {
       attachEvents: function () {
         const e = this,
           t = a(),
           { params: s, support: i } = e;
         (e.onTouchStart = G.bind(e)),
           (e.onTouchMove = B.bind(e)),
-          (e.onTouchEnd = _.bind(e)),
+          (e.onTouchEnd = N.bind(e)),
           s.cssMode && (e.onScroll = j.bind(e)),
           (e.onClick = H.bind(e)),
           i.touch && !F && (t.addEventListener("touchstart", q), (F = !0)),
-          W(e, "on");
+          V(e, "on");
       },
       detachEvents: function () {
-        W(this, "off");
+        V(this, "off");
       },
     },
     R = (e, t) => e.grid && t.grid && t.grid.rows > 1;
@@ -2610,7 +2610,7 @@
     };
   }
   const J = {
-      eventsEmitter: P,
+      eventsEmitter: L,
       update: O,
       translate: A,
       transition: {
@@ -2661,7 +2661,7 @@
             ].style.cursor = "");
         },
       },
-      events: V,
+      events: W,
       breakpoints: X,
       checkOverflow: {
         checkOverflow: function () {
@@ -2750,9 +2750,9 @@
       }
       const i = this;
       (i.__swiper__ = !0),
-        (i.support = $()),
-        (i.device = k({ userAgent: s.userAgent })),
-        (i.browser = L()),
+        (i.support = k()),
+        (i.device = $({ userAgent: s.userAgent })),
+        (i.browser = P()),
         (i.eventsListeners = {}),
         (i.eventsAnyListeners = []),
         (i.modules = [...i.__modules__]),
@@ -3725,77 +3725,70 @@
       destroy: u,
     });
   }
-  let re, ae;
   window.addEventListener("load", function (e) {
-    window.innerWidth <= 991.98
-      ? ((re = ".projects__button-next"), (ae = ".projects__button-prev"))
-      : ((re = ".swiper-button-next"), (ae = ".swiper-button-prev")),
-      (async function () {
-        if (document.querySelector(".swiper")) {
-          const e = new ee(".swiper", {
-              modules: [se, ne],
-              observer: !0,
-              observeParents: !0,
-              slidesPerView: 1,
-              spaceBetween: 0,
-              autoHeight: !0,
-              speed: 800,
-              pagination: { el: ".swiper-pagination", clickable: !0 },
-              navigation: { nextEl: re, prevEl: ae },
-              on: {},
-            }),
-            t = document.querySelectorAll(`${re}, ${ae}, .swiper-pagination`),
-            s = document.querySelectorAll(".projects__type");
-          let i = document.querySelector(".projects__slider"),
-            n = JSON.stringify([
-              [
-                "Rostov-on-Don LCD Admiral",
-                "81 m2",
-                "3.5 months",
-                "Upon request",
-              ],
-              ["Sochi LCD Thieves", "98 m2", "2.6 months", "Upon request"],
-              [
-                "Rostov-on-Don LCD Patriotic",
-                "78 m2",
-                "4.5 months",
-                "Upon request",
-              ],
-            ]);
-          n = JSON.parse(n);
-          let r = document.querySelectorAll(".item__subtitle");
-          function a() {
-            const t = e.realIndex;
-            for (let e = 0; e < s.length; e++)
-              (s[e].style.color = "rgba(255,255,255,0.3)"),
-                (r[e].textContent = n[t][e]);
-            s[t].style.color = "#E3B873";
-          }
-          for (let l = 0; l < s.length; l++)
-            s[l].addEventListener("click", () => {
-              e.slideTo(l), a();
-            });
-          i.addEventListener("mousemove", () => {
-            a();
+    !(async function () {
+      if (document.querySelector(".swiper")) {
+        const e = new ee(".swiper", {
+            modules: [se, ne],
+            observer: !0,
+            observeParents: !0,
+            slidesPerView: 1,
+            spaceBetween: 30,
+            autoHeight: !0,
+            speed: 1e3,
+            pagination: { el: ".swiper-pagination", clickable: !0 },
+            navigation: {
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            },
+            on: {},
           }),
-            t.forEach((e) => {
-              e.addEventListener("click", () => {
-                a();
-              });
-            }),
-            e.on("slideChange", function () {
-              const t = e.realIndex;
-              for (let e = 0; e < s.length; e++)
-                (s[e].style.color = "rgba(255,255,255,0.3)"),
-                  (r[e].textContent = n[t][e]);
-              s[t].style.color = "#E3B873";
-            });
+          t = document.querySelector(".projects__button-next");
+        document
+          .querySelector(".projects__button-prev")
+          .addEventListener("click", function () {
+            e.slidePrev();
+          }),
+          t.addEventListener("click", function () {
+            e.slideNext();
+          });
+        const s = document.querySelectorAll(".projects__type");
+        let i = JSON.stringify([
+          ["Rostov-on-Don LCD Admiral", "81 m2", "3.5 months", "Upon request"],
+          ["Sochi LCD Thieves", "98 m2", "2.6 months", "Upon request"],
+          [
+            "Rostov-on-Don LCD Patriotic",
+            "78 m2",
+            "4.5 months",
+            "Upon request",
+          ],
+        ]);
+        i = JSON.parse(i);
+        let n = document.querySelectorAll(".item__subtitle");
+        function r() {
+          const t = e.realIndex;
+          for (let e = 0; e < s.length; e++)
+            (s[e].style.color = "rgba(255,255,255,0.3)"),
+              (n[e].textContent = i[t][e]);
+          s[t].style.color = "#E3B873";
         }
-      })();
+        for (let a = 0; a < s.length; a++)
+          s[a].addEventListener("click", () => {
+            e.slideTo(a), r();
+          });
+        e.on("slideChange", function () {
+          const t = e.realIndex;
+          for (let e = 0; e < s.length; e++)
+            (s[e].style.color = "rgba(255,255,255,0.3)"),
+              (n[e].textContent = i[t][e]);
+          s[t].style.color = "#E3B873";
+        });
+      }
+    })();
   });
-  let le = !1;
+  let re = !1;
   setTimeout(() => {
-    if (le) {
+    if (re) {
       let e = new Event("windowScroll");
       window.addEventListener("scroll", function (t) {
         document.dispatchEvent(e);
