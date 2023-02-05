@@ -617,6 +617,13 @@ h6 {
   height: 36px;
   border-radius: 50%;
   background-color: #E3B873;
+  transition: background-color 0.3s ease 0s, box-shadow 0.3s ease 0s;
+}
+.projects__button-prev:hover {
+  box-shadow: 0px 0px 13px rgba(227, 184, 115, 0.2);
+}
+.projects__button-prev:active {
+  background-color: #ddaa58;
 }
 .projects__button-prev img {
   position: absolute;
@@ -626,7 +633,7 @@ h6 {
 @media (max-width: 61.99875em) {
   .projects__button-prev {
     display: block;
-    left: 0%;
+    left: 1.5%;
   }
 }
 @media (max-width: 47.99875em) {
@@ -645,6 +652,13 @@ h6 {
   height: 36px;
   border-radius: 50%;
   background-color: #E3B873;
+  transition: background-color 0.3s ease 0s, box-shadow 0.3s ease 0s;
+}
+.projects__button-next:hover {
+  box-shadow: 0px 0px 13px rgba(227, 184, 115, 0.2);
+}
+.projects__button-next:active {
+  background-color: #ddaa58;
 }
 .projects__button-next img {
   position: absolute;
@@ -654,7 +668,7 @@ h6 {
 @media (max-width: 61.99875em) {
   .projects__button-next {
     display: block;
-    right: 0%;
+    right: 1.5%;
   }
 }
 @media (max-width: 47.99875em) {
@@ -987,8 +1001,20 @@ button.swiper-pagination-bullet {
   transition: 0.2s transform, 0.2s right;
 }
 
-.control__container {
-  margin-bottom: 100px;
+@media (min-width: 90em) {
+  .control__container {
+    margin-bottom: 7.5rem;
+  }
+}
+@media (min-width: 23.4375em) and (max-width: 90em) {
+  .control__container {
+    margin-bottom: clamp( 5.1875rem , 4.3732394366rem  +  3.4741784038vw , 7.5rem );
+  }
+}
+@media (max-width: 23.4375em) {
+  .control__container {
+    margin-bottom: 5.1875rem;
+  }
 }
 .control__body {
   max-width: 817px;
@@ -1037,7 +1063,13 @@ button.swiper-pagination-bullet {
   right: 0;
   left: 0;
   z-index: 3;
+  transition: background-color 0.3s ease 0s, box-shadow 0.3s ease 0s;
+}
+.control__video-button:hover {
   box-shadow: 0px 5px 30px rgba(227, 184, 115, 0.2);
+}
+.control__video-button:active {
+  background-color: #ddaa58;
 }
 @media (max-width: 47.99875em) {
   .control__video-button {
@@ -1057,7 +1089,6 @@ button.swiper-pagination-bullet {
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   top: 0;
-  pointer-events: none;
   border-radius: 4px;
 }
 .control__line {
@@ -1217,13 +1248,22 @@ button.swiper-pagination-bullet {
 .control-form__item input {
   font-size: 14px;
   line-height: 23px;
-  color: #363636;
+  color: #131313;
   text-decoration: none;
 }
 @media (max-width: 47.99875em) {
   .control-form__item input {
     background-color: rgb(24, 24, 24);
     color: #FFFFFF;
+  }
+}
+.control-form__item input::placeholder {
+  color: #363636;
+}
+@media (max-width: 47.99875em) {
+  .control-form__item input::placeholder {
+    color: #FFFFFF;
+    opacity: 1;
   }
 }
 @media (max-width: 47.99875em) {
@@ -1250,11 +1290,12 @@ button.swiper-pagination-bullet {
   line-height: 163.68%;
   color: #181818;
   margin-left: 6px;
+  cursor: pointer;
 }
 .control-form__label {
   font-size: 13px;
   line-height: 21px;
-  color: rgba(54, 54, 54, 0.8);
+  color: rgba(54, 54, 54, 0.5);
 }
 @media (max-width: 47.99875em) {
   .control-form__label {
@@ -1303,6 +1344,7 @@ button.swiper-pagination-bullet {
 .custom-checkbox + label::before {
   content: "";
   display: inline-block;
+  cursor: pointer;
   width: 17px;
   height: 17px;
   flex-shrink: 0;
@@ -1326,8 +1368,14 @@ button.swiper-pagination-bullet {
 
 /* стили при наведении курсора на checkbox */
 .custom-checkbox:not(:disabled):not(:checked) + label:hover::before {
-  box-shadow: 0px 0px 3px #FFFFFF;
-  border: 1px solid #FFFFFF;
+  box-shadow: 0px 0px 4px #181818;
+  border: 1px solid #181818;
+}
+@media (max-width: 47.99875em) {
+  .custom-checkbox:not(:disabled):not(:checked) + label:hover::before {
+    box-shadow: 0px 0px 4px #FFFFFF;
+    border: 1px solid #FFFFFF;
+  }
 }
 
 /* стили для активного состояния чекбокса (при нажатии на него) */
@@ -1335,11 +1383,132 @@ button.swiper-pagination-bullet {
 .custom-checkbox:focus + label::before {
   border: 1px solid #181818;
 }
+@media (max-width: 47.99875em) {
+  .custom-checkbox:focus + label::before {
+    border: 1px solid #FFFFFF;
+  }
+}
 
 /* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
 /* стили для чекбокса, находящегося в состоянии disabled */
 .custom-checkbox:disabled + label::before {
   background: #FFFFFF;
+}
+
+.types__container {
+  margin-bottom: 230px;
+}
+@media (max-width: 29.99875em) {
+  .types__container {
+    margin-bottom: 75px;
+  }
+}
+.types__black {
+  color: #181818;
+}
+.types__items {
+  display: flex;
+  justify-content: center;
+  column-gap: 30px;
+  row-gap: 80px;
+}
+@media (max-width: 61.99875em) {
+  .types__items {
+    flex-wrap: wrap;
+  }
+}
+.types__item {
+  width: fit-content;
+  position: relative;
+  transition: transform 0.3s ease 0s;
+}
+.types__item:hover {
+  transform: scale(1.03);
+}
+.types__image {
+  border-radius: 2px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.types__block {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto;
+  padding: 22px 32px 36px;
+  background: #FFFFFF;
+  width: 85%;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 2px;
+  margin-top: -34%;
+}
+@media (max-width: 29.99875em) {
+  .types__block {
+    margin-left: 0;
+    padding-bottom: 24px;
+  }
+}
+.types__name {
+  font-family: "Yeseva One";
+  font-size: 20px;
+  line-height: 138.888889%; /* 25/18 */
+  color: #363636;
+  margin-bottom: 10px;
+}
+@media (max-width: 29.99875em) {
+  .types__name {
+    font-size: 16px;
+  }
+}
+.types__list {
+  position: relative;
+  padding-bottom: 12px;
+}
+.types__text {
+  font-size: 13px;
+  display: flex;
+  line-height: 207.692308%; /* 27/13 */
+  color: #959595;
+  align-items: center;
+  column-gap: 6px;
+}
+.types__text::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #959595;
+  margin-bottom: 2px;
+}
+@media (max-width: 29.99875em) {
+  .types__text {
+    line-height: 180.8%;
+  }
+}
+.types__button {
+  position: absolute;
+  left: 0;
+  border-radius: 2px;
+  display: inline;
+  font-family: "Yeseva One";
+  font-size: 18px;
+  line-height: 138.888889%; /* 25/18 */
+  text-transform: uppercase;
+  color: #FFFFFF;
+  background-color: #E3B873;
+  padding: 17px 19px;
+  bottom: -27px;
+  cursor: pointer;
+  transition: background-color 0.3s ease 0s;
+}
+@media (max-width: 29.99875em) {
+  .types__button {
+    font-size: 15px;
+    padding: 12px 16px;
+  }
+}
+.types__button:hover {
+  background-color: #ddaa58;
 }
 
 .page__projects {
