@@ -763,8 +763,8 @@
       };
     p();
   }
-  let E, x, M;
-  function k() {
+  let E, x, k;
+  function M() {
     return (
       E ||
         (E = (function () {
@@ -799,7 +799,7 @@
     return (
       x ||
         (x = (function ({ userAgent: e } = {}) {
-          const t = k(),
+          const t = M(),
             s = o(),
             i = s.navigator.platform,
             n = e || s.navigator.userAgent,
@@ -843,8 +843,8 @@
   }
   function L() {
     return (
-      M ||
-        (M = (function () {
+      k ||
+        (k = (function () {
           const e = o();
           return {
             isSafari: (function () {
@@ -860,7 +860,7 @@
             ),
           };
         })()),
-      M
+      k
     );
   }
   const P = {
@@ -945,7 +945,7 @@
       );
     },
   };
-  const O = {
+  const z = {
     updateSize: function () {
       const e = this;
       let t, s;
@@ -1029,7 +1029,7 @@
       const E = i.grid && i.grid.rows > 1 && e.grid;
       let x;
       E && e.grid.initSlides(p);
-      const M =
+      const k =
         "auto" === i.slidesPerView &&
         i.breakpoints &&
         Object.keys(i.breakpoints).filter(
@@ -1042,7 +1042,7 @@
           (E && e.grid.updateSlide(n, a, p, t), "none" !== a.css("display"))
         ) {
           if ("auto" === i.slidesPerView) {
-            M && (c[n].style[t("width")] = "");
+            k && (c[n].style[t("width")] = "");
             const r = getComputedStyle(a[0]),
               l = a[0].style.transform,
               o = a[0].style.webkitTransform;
@@ -1432,7 +1432,7 @@
           t.slideToClickedSlide();
     },
   };
-  const A = {
+  const O = {
     getTranslate: function (e = this.isHorizontal() ? "x" : "y") {
       const { params: t, rtlTranslate: s, translate: i, $wrapperEl: n } = this;
       if (t.virtualTranslate) return s ? -i : i;
@@ -1538,7 +1538,7 @@
       );
     },
   };
-  function I({ swiper: e, runCallbacks: t, direction: s, step: i }) {
+  function A({ swiper: e, runCallbacks: t, direction: s, step: i }) {
     const { activeIndex: n, previousIndex: r } = e;
     let a = s;
     if (
@@ -1553,7 +1553,7 @@
           : e.emit(`slidePrevTransition${i}`);
     }
   }
-  const z = {
+  const I = {
     slideTo: function (e = 0, t = this.params.speed, s = !0, i, n) {
       if ("number" != typeof e && "string" != typeof e)
         throw new Error(
@@ -1909,7 +1909,7 @@
         s.removeAttr("data-swiper-slide-index");
     },
   };
-  function G(e) {
+  function j(e) {
     const t = this,
       s = a(),
       i = o(),
@@ -2000,7 +2000,7 @@
       t.freeMode.onTouchStart(),
       t.emit("touchStart", c);
   }
-  function B(e) {
+  function _(e) {
     const t = a(),
       s = this,
       i = s.touchEventsData,
@@ -2159,7 +2159,7 @@
       s.updateProgress(i.currentTranslate),
       s.setTranslate(i.currentTranslate));
   }
-  function _(e) {
+  function G(e) {
     const t = this,
       s = t.touchEventsData,
       { params: i, touches: n, rtlTranslate: r, slidesGrid: a, enabled: l } = t;
@@ -2264,7 +2264,7 @@
           "prev" === t.swipeDirection && t.slideTo(null !== m ? m : u));
     }
   }
-  function N() {
+  function B() {
     const e = this,
       { params: t, el: s } = e;
     if (s && 0 === s.offsetWidth) return;
@@ -2286,7 +2286,7 @@
       (e.allowSlideNext = i),
       e.params.watchOverflow && r !== e.snapGrid && e.checkOverflow();
   }
-  function H(e) {
+  function N(e) {
     const t = this;
     t.enabled &&
       (t.allowClick ||
@@ -2295,7 +2295,7 @@
           t.animating &&
           (e.stopPropagation(), e.stopImmediatePropagation())));
   }
-  function j() {
+  function F() {
     const e = this,
       { wrapperEl: t, rtlTranslate: s, enabled: i } = e;
     if (!i) return;
@@ -2312,8 +2312,8 @@
       n !== e.progress && e.updateProgress(s ? -e.translate : e.translate),
       e.emit("setTranslate", e.translate, !1);
   }
-  let q = !1;
-  function F() {}
+  let H = !1;
+  function q() {}
   const V = (e, t) => {
     const s = a(),
       {
@@ -2353,22 +2353,22 @@
             o.ios || o.android
               ? "resize orientationchange observerUpdate"
               : "resize observerUpdate",
-            N,
+            B,
             !0
           )
-        : e[u]("observerUpdate", N, !0);
+        : e[u]("observerUpdate", B, !0);
   };
   const W = {
       attachEvents: function () {
         const e = this,
           t = a(),
           { params: s, support: i } = e;
-        (e.onTouchStart = G.bind(e)),
-          (e.onTouchMove = B.bind(e)),
-          (e.onTouchEnd = _.bind(e)),
-          s.cssMode && (e.onScroll = j.bind(e)),
-          (e.onClick = H.bind(e)),
-          i.touch && !q && (t.addEventListener("touchstart", F), (q = !0)),
+        (e.onTouchStart = j.bind(e)),
+          (e.onTouchMove = _.bind(e)),
+          (e.onTouchEnd = G.bind(e)),
+          s.cssMode && (e.onScroll = F.bind(e)),
+          (e.onClick = N.bind(e)),
+          i.touch && !H && (t.addEventListener("touchstart", q), (H = !0)),
           V(e, "on");
       },
       detachEvents: function () {
@@ -2611,8 +2611,8 @@
   }
   const J = {
       eventsEmitter: P,
-      update: O,
-      translate: A,
+      update: z,
+      translate: O,
       transition: {
         setTransition: function (e, t) {
           const s = this;
@@ -2624,7 +2624,7 @@
             { params: i } = s;
           i.cssMode ||
             (i.autoHeight && s.updateAutoHeight(),
-            I({ swiper: s, runCallbacks: e, direction: t, step: "Start" }));
+            A({ swiper: s, runCallbacks: e, direction: t, step: "Start" }));
         },
         transitionEnd: function (e = !0, t) {
           const s = this,
@@ -2632,10 +2632,10 @@
           (s.animating = !1),
             i.cssMode ||
               (s.setTransition(0),
-              I({ swiper: s, runCallbacks: e, direction: t, step: "End" }));
+              A({ swiper: s, runCallbacks: e, direction: t, step: "End" }));
         },
       },
-      slide: z,
+      slide: I,
       loop: D,
       grabCursor: {
         setGrabCursor: function (e) {
@@ -2750,7 +2750,7 @@
       }
       const i = this;
       (i.__swiper__ = !0),
-        (i.support = k()),
+        (i.support = M()),
         (i.device = $({ userAgent: s.userAgent })),
         (i.browser = L()),
         (i.eventsListeners = {}),
@@ -3784,6 +3784,21 @@
           s[t].style.color = "#E3B873";
         });
       }
+      document.querySelector(".swiper-second") &&
+        new ee(".swiper-second", {
+          modules: [se],
+          observer: !0,
+          observeParents: !0,
+          slidesPerView: 1,
+          spaceBetween: 30,
+          autoHeight: !0,
+          speed: 1e3,
+          navigation: {
+            nextEl: ".realize__button-next",
+            prevEl: ".realize__button-prev",
+          },
+          on: {},
+        });
     })();
   });
   let re = !1;
@@ -3831,5 +3846,84 @@
       le.classList.add("video-active"),
         ae.classList.add("video-active"),
         oe.play();
+    });
+  const de = document.querySelectorAll(".realize__item");
+  let ce = document.querySelectorAll(".realize__image"),
+    pe = [
+      [
+        "img/realize1.jpg",
+        "img/realize2.jpg",
+        "img/realize4.jpg",
+        "img/realize3.jpg",
+      ],
+      [
+        "./img/realize3.jpg",
+        "./img/realize4.jpg",
+        "./img/realize1.jpg",
+        "./img/realize2.jpg",
+      ],
+      [
+        "./img/realize1.jpg",
+        "./img/realize2.jpg",
+        "./img/realize4.jpg",
+        "./img/realize3.jpg",
+      ],
+      [
+        "./img/realize3.jpg",
+        "./img/realize4.jpg",
+        "./img/realize1.jpg",
+        "./img/realize2.jpg",
+      ],
+      [
+        "./img/realize1.jpg",
+        "./img/realize2.jpg",
+        "./img/realize4.jpg",
+        "./img/realize3.jpg",
+      ],
+      [
+        "./img/realize3.jpg",
+        "./img/realize4.jpg",
+        "./img/realize1.jpg",
+        "./img/realize2.jpg",
+      ],
+      [
+        "./img/realize1.jpg",
+        "./img/realize2.jpg",
+        "./img/realize4.jpg",
+        "./img/realize3.jpg",
+      ],
+      [
+        "./img/realize2.jpg",
+        "./img/realize4.jpg",
+        "./img/realize1.jpg",
+        "./img/realize2.jpg",
+      ],
+      [
+        "./img/realize3.jpg",
+        "./img/realize4.jpg",
+        "./img/realize1.jpg",
+        "./img/realize2.jpg",
+      ],
+      [
+        "./img/realize1.jpg",
+        "./img/realize2.jpg",
+        "./img/realize4.jpg",
+        "./img/realize3.jpg",
+      ],
+      [
+        "./img/realize2.jpg",
+        "./img/realize4.jpg",
+        "./img/realize1.jpg",
+        "./img/realize2.jpg",
+      ],
+    ];
+  function ue(e) {
+    for (let e = 0; e < de.length; e++) de[e].style.color = "#FFFFFF";
+    de[e].style.color = "#E3B873";
+    for (let t = 0; t < ce.length; t++) ce[t].setAttribute("src", pe[e][t]);
+  }
+  for (let e = 0; e < de.length; e++)
+    de[e].addEventListener("click", () => {
+      ue(e);
     });
 })();
